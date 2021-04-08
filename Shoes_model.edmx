@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Run">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="smalldatetime" Nullable="false" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+          <Property Name="Shoes" Type="int" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Distance" Type="int" Nullable="false" />
+          <Property Name="Limit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TEST" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Run_Shoes">
+          <End Role="Shoes" Type="Self.Shoes" Multiplicity="0..1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shoes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="Shoes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_SelectAllRuns_WithShouesName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_SelectAllShoes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_SelectAllShoesToShoesPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="TestModelStoreContainer">
+          <EntitySet Name="Run" EntityType="Self.Run" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shoes" EntityType="Self.Shoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Run_Shoes" Association="Self.FK_Run_Shoes">
+            <End Role="Shoes" EntitySet="Shoes" />
+            <End Role="Run" EntitySet="Run" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Run">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+          <Property Name="Shoes" Type="Int32" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Shoes1" Relationship="Self.FK_Run_Shoes" FromRole="Run" ToRole="Shoes" />
+        </EntityType>
+        <EntityType Name="Shoes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Distance" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Run" Relationship="Self.FK_Run_Shoes" FromRole="Shoes" ToRole="Run" />
+          <Property Name="Limit" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TEST" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Run_Shoes">
+          <End Role="Shoes" Type="Self.Shoes" Multiplicity="0..1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shoes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="Shoes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShoesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Run" EntityType="Self.Run" />
+          <EntitySet Name="Shoes" EntityType="Self.Shoes" />
+          <EntitySet Name="Table" EntityType="Self.Table" />
+          <AssociationSet Name="FK_Run_Shoes" Association="Self.FK_Run_Shoes">
+            <End Role="Shoes" EntitySet="Shoes" />
+            <End Role="Run" EntitySet="Run" />
+          </AssociationSet>
+          <FunctionImport Name="SP_SelectAllRuns_WithShouesName" ReturnType="Collection(TestModel.SP_SelectAllRuns_WithShouesName_Result)" />
+          <FunctionImport Name="SP_SelectAllShoesToShoesPanel" ReturnType="Collection(TestModel.SP_SelectAllShoesToShoesPanel_Result)" />
+          <FunctionImport Name="SP_SelectAllShoes" ReturnType="Collection(TestModel.SP_SelectAllShoes_Result)" />
+        </EntityContainer>
+        <ComplexType Name="SP_SelectAllRuns_WithShouesName_Result">
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="16" />
+          <Property Type="Int32" Name="Distance" Nullable="false" />
+          <Property Type="Time" Name="Time" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_SelectAllShoesToShoesPanel_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Limit" Nullable="false" />
+          <Property Type="Int32" Name="DistanceSUM" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_SelectAllShoes_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="ShoesEntities">
+          <EntitySetMapping Name="Run">
+            <EntityTypeMapping TypeName="TestModel.Run">
+              <MappingFragment StoreEntitySet="Run">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Shoes" ColumnName="Shoes" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shoes">
+            <EntityTypeMapping TypeName="TestModel.Shoes">
+              <MappingFragment StoreEntitySet="Shoes">
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Table">
+            <EntityTypeMapping TypeName="TestModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TEST" ColumnName="TEST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectAllRuns_WithShouesName" FunctionName="TestModel.Store.SP_SelectAllRuns_WithShouesName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TestModel.SP_SelectAllRuns_WithShouesName_Result">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectAllShoesToShoesPanel" FunctionName="TestModel.Store.SP_SelectAllShoesToShoesPanel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TestModel.SP_SelectAllShoesToShoesPanel_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+                <ScalarProperty Name="DistanceSUM" ColumnName="DistanceSUM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectAllShoes" FunctionName="TestModel.Store.SP_SelectAllShoes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TestModel.SP_SelectAllShoes_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

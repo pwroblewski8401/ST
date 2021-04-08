@@ -1,0 +1,44 @@
+﻿<Window x:Class="ST.Windows.AddNewActivity"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ST.Windows"
+        mc:Ignorable="d"
+        Title="AddNewActivity" Height="600" Width="600" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" Loaded="Window_Loaded">
+    <Grid Background="#FF3F3F46">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Add new Activity" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" FontSize="48" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <TextBlock Text="Date:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="20" Foreground="White" />
+        <DatePicker Name="DatePicker_date" Width="300" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center"/>
+
+        <TextBlock Text="Distance:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="20" Foreground="White" />
+        <TextBox x:Name="txt_Distance" Grid.Column="1" HorizontalAlignment="Center" Width="300" Height="24"  Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" />
+
+
+        <TextBlock Text="Time:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="20" Foreground="White" />
+        <TextBox x:Name="txt_time" Grid.Column="1" HorizontalAlignment="Center" Width="300" Height="24"  Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" />
+
+
+        <TextBlock Text="Shoes:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="8,0,0,0" FontSize="20" Foreground="White" />
+        <ComboBox x:Name="combo_shoes" Grid.Column="1" HorizontalAlignment="Center"  Grid.Row="4" VerticalAlignment="Center" Width="300" SelectedValuePath="Tag" SelectionChanged="combo_shoes_SelectionChanged" />
+
+        <StackPanel Grid.Column="1" Grid.Row="5">
+        <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click"/>
+        <Button x:Name="btn_OK" Content="Ok" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
