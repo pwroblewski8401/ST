@@ -45,5 +45,26 @@ namespace ST
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SelectAllShoes_Result>("SP_SelectAllShoes");
         }
+    
+        public virtual int SP_AddNewRun(Nullable<System.DateTime> date, Nullable<int> distance, Nullable<int> shoes, Nullable<System.TimeSpan> time)
+        {
+            var dateParameter = date.HasValue ?
+                new ObjectParameter("date", date) :
+                new ObjectParameter("date", typeof(System.DateTime));
+    
+            var distanceParameter = distance.HasValue ?
+                new ObjectParameter("distance", distance) :
+                new ObjectParameter("distance", typeof(int));
+    
+            var shoesParameter = shoes.HasValue ?
+                new ObjectParameter("shoes", shoes) :
+                new ObjectParameter("shoes", typeof(int));
+    
+            var timeParameter = time.HasValue ?
+                new ObjectParameter("time", time) :
+                new ObjectParameter("time", typeof(System.TimeSpan));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AddNewRun", dateParameter, distanceParameter, shoesParameter, timeParameter);
+        }
     }
 }

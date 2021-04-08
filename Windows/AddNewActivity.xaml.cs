@@ -19,11 +19,13 @@ namespace ST.Windows
     /// </summary>
     public partial class AddNewActivity : Window
     {
+        MainWindow parentWindow;
         ShoesEntities context = new ShoesEntities();
-        public AddNewActivity()
+        public AddNewActivity(MainWindow parentWindow)
         {
             InitializeComponent();
             DataContext = this;
+            this.parentWindow = parentWindow;
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
@@ -49,6 +51,15 @@ namespace ST.Windows
         {
             var a = combo_shoes.SelectedItem;
             var b = combo_shoes.SelectedValue;
+        }
+
+        private void btn_OK_Click(object sender, RoutedEventArgs e)
+        {
+            var b = TimeSpan.Parse(txt_time.Text);
+            var result = context.SP_AddNewRun(DatePicker_date.SelectedDate, Convert.ToInt32(txt_Distance.Text), Convert.ToInt32(combo_shoes.SelectedValue), TimeSpan.Parse(txt_time.Text));
+            parentWindow.refreshMainPanel();
+            parentWindow.refreshShoesPanel();
+            this.Close();
         }
     }
 }

@@ -41,7 +41,11 @@ namespace ST.UserControls
             lb_time.Content = time;
             lb_shoes.Content = shoes;
             lb_distance.Content = distance;
-            lb_avg.Content = new TimeSpan(time.Ticks / distance);
+            if(distance >= 1000)
+                lb_avg.Content = new TimeSpan(time.Ticks / (distance / 1000)).ToString(@"hh\:mm\:ss");
+            else
+                lb_avg.Content = new TimeSpan(time.Ticks / (distance)).ToString(@"hh\:mm\:ss"); 
+
         }
     }
 }

@@ -43,6 +43,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_AddNewRun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date" Type="smalldatetime" Mode="In" />
+          <Parameter Name="distance" Type="int" Mode="In" />
+          <Parameter Name="shoes" Type="int" Mode="In" />
+          <Parameter Name="time" Type="time" Mode="In" />
+        </Function>
         <Function Name="SP_SelectAllRuns_WithShouesName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_SelectAllShoes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_SelectAllShoesToShoesPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -110,6 +116,12 @@
           <FunctionImport Name="SP_SelectAllRuns_WithShouesName" ReturnType="Collection(TestModel.SP_SelectAllRuns_WithShouesName_Result)" />
           <FunctionImport Name="SP_SelectAllShoesToShoesPanel" ReturnType="Collection(TestModel.SP_SelectAllShoesToShoesPanel_Result)" />
           <FunctionImport Name="SP_SelectAllShoes" ReturnType="Collection(TestModel.SP_SelectAllShoes_Result)" />
+          <FunctionImport Name="SP_AddNewRun">
+            <Parameter Name="date" Mode="In" Type="DateTime" />
+            <Parameter Name="distance" Mode="In" Type="Int32" />
+            <Parameter Name="shoes" Mode="In" Type="Int32" />
+            <Parameter Name="time" Mode="In" Type="Time" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_SelectAllRuns_WithShouesName_Result">
           <Property Type="DateTime" Name="Date" Nullable="false" Precision="16" />
@@ -188,6 +200,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_AddNewRun" FunctionName="TestModel.Store.SP_AddNewRun" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
