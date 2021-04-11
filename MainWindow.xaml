@@ -23,6 +23,7 @@
             <TextBlock x:Name="text_Sum" TextWrapping="Wrap" VerticalAlignment="Center" Margin="20,0,0,0" />
         </WrapPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Name="StackPanelMain"  />
-        <StackPanel Background="AliceBlue" Grid.Row="1" Grid.Column="1" Name="StackPanelShoes" />
+        <StackPanel Background="AliceBlue" Grid.Row="1" Grid.Column="1" Name="StackPanelShoes">
+        </StackPanel>
     </Grid>
 </Window>

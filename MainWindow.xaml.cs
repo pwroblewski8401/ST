@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-
+using System.Windows.Controls;
 
 namespace ST
 {
@@ -58,6 +58,18 @@ namespace ST
                 UserControls.Shoes shoes = new UserControls.Shoes(line.Name, (line.DistanceSUM), line.Limit);
                 StackPanelShoes.Children.Add(shoes);
             }
+
+            addButtonAddNewShoes();
+
+        }
+
+        private void addButtonAddNewShoes()
+        {
+            Button button = new Button();
+            button.Height = 35;
+            button.Width = 140;
+            button.Content = "Add new shoes";
+            StackPanelShoes.Children.Add(button);
         }
     }
 }
