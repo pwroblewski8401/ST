@@ -5,29 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ST.UserControls"
              mc:Ignorable="d" 
-             MaxHeight="100" MinHeight="100" MinWidth="600" Loaded="UserControl_Loaded">
-    <Grid Background="#00ADB5">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="150" />
-            <ColumnDefinition Width="150" />
-        </Grid.ColumnDefinitions>
-        <StackPanel Name="st_date" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label Name="lb_date" Margin="5,0,0,0"/>
-        </StackPanel>
-        <StackPanel Name="st_shoes" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label Name="lb_shoes" Margin="5,0,0,0"/>
-        </StackPanel>
-        <StackPanel Name="st_distance" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label Name="lb_distance" Margin="5,0,0,0"/>
-        </StackPanel>
-        <StackPanel Name="st_time" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label Name="lb_time" Margin="5,0,0,0"/>
-        </StackPanel>
-        <StackPanel Name="st_avg" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <Label Name="lb_avg" Margin="5,0,0,0"/>
-        </StackPanel>
-    </Grid>
+             MaxHeight="100" MinHeight="100" MinWidth="600" Loaded="UserControl_Loaded" Margin="5,5,5,0">
+    <Border CornerRadius="5"  BorderThickness="1" Background="#00ADB5">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Name="st_date" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label Name="lb_date" Margin="5,0,0,0"/>
+            </StackPanel>
+            <StackPanel Name="st_shoes" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label Name="lb_shoes" Margin="5,0,0,0"/>
+            </StackPanel>
+            <StackPanel Name="st_distance" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label Name="lb_distance" Margin="5,0,0,0"/>
+            </StackPanel>
+            <StackPanel Name="st_time" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label Name="lb_time" Margin="5,0,0,0"/>
+            </StackPanel>
+            <StackPanel Name="st_avg" Grid.Column="4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label Name="lb_avg" Margin="5,0,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
