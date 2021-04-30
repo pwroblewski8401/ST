@@ -71,5 +71,22 @@ namespace ST
             button.Content = "Add new shoes";
             StackPanelShoes.Children.Add(button);
         }
+
+        private void DEBUG_btn_add_fake_act_Click(object sender, RoutedEventArgs e)
+        {
+            Random rnd = new Random();
+            UserControls.SingleRun sr = new UserControls.SingleRun(DateTime.Now, "Fake shoes", rnd.Next(1000, 12000), TimeSpan.FromMinutes(rnd.Next(45, 120)));
+            StackPanelMain.Children.Add(sr);
+        }
+
+        private void DEBUG_btn_add_fake_act_x5_Click(object sender, RoutedEventArgs e)
+        {
+            for(int i=0; i < 6; i++)
+            {
+                Random rnd = new Random();
+                UserControls.SingleRun sr = new UserControls.SingleRun(DateTime.Now, "Fake shoes", rnd.Next(1000, 12000), TimeSpan.FromMinutes(rnd.Next(45, 120)));
+                StackPanelMain.Children.Add(sr);
+            }
+        }
     }
 }

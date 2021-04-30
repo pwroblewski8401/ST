@@ -21,8 +21,12 @@
         <WrapPanel Grid.Row="0" Height="70" Grid.ColumnSpan="2">
             <Button Name="btn_AddNew" Width="70" Height="70" Foreground="White" VerticalAlignment="Center" Background="#83A95C" BorderThickness="0" Content="ADD" FontSize="20" FontFamily="Times New Roman" FontWeight="Bold" Margin="5,0,0,0" Click="btn_AddNew_Click" />
             <TextBlock x:Name="text_Sum" TextWrapping="Wrap" VerticalAlignment="Center" Margin="20,0,0,0" />
+            <Button x:Name="DEBUG_btn_add_fake_act" Content="Add act" Width="75" Click="DEBUG_btn_add_fake_act_Click"/>
+            <Button x:Name="DEBUG_btn_add_fake_act_x5" Content="Add act x5" Width="75" Click="DEBUG_btn_add_fake_act_x5_Click"/>
         </WrapPanel>
-        <StackPanel Grid.Row="1" Grid.Column="0" Name="StackPanelMain"  />
+        <ScrollViewer Name="scr_view" Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" >
+            <StackPanel Name="StackPanelMain"  />
+        </ScrollViewer>
         <StackPanel Background="AliceBlue" Grid.Row="1" Grid.Column="1" Name="StackPanelShoes">
         </StackPanel>
     </Grid>
