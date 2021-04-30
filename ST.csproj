@@ -103,6 +103,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Shoes_model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="SP_SelectAllRuns_WithShoesName_WithTerrainType_Result.cs">
+      <DependentUpon>Shoes_model.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_SelectAllRuns_WithShouesName_Result.cs">
       <DependentUpon>Shoes_model.tt</DependentUpon>
     </Compile>
@@ -113,6 +116,9 @@
       <DependentUpon>Shoes_model.tt</DependentUpon>
     </Compile>
     <Compile Include="Table.cs">
+      <DependentUpon>Shoes_model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TerrainTypes.cs">
       <DependentUpon>Shoes_model.tt</DependentUpon>
     </Compile>
     <Compile Include="UserControls\AddNewRun.xaml.cs">

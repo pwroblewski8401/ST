@@ -14,6 +14,7 @@
           <Property Name="Distance" Type="int" Nullable="false" />
           <Property Name="Shoes" Type="int" />
           <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Terrain" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Shoes">
           <Key>
@@ -31,6 +32,13 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="TEST" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="TerrainTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+        </EntityType>
         <Association Name="FK_Run_Shoes">
           <End Role="Shoes" Type="Self.Shoes" Multiplicity="0..1" />
           <End Role="Run" Type="Self.Run" Multiplicity="*" />
@@ -43,12 +51,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Run_TerrainTypes">
+          <End Role="TerrainTypes" Type="Self.TerrainTypes" Multiplicity="1" />
+          <End Role="Run" Type="Self.Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TerrainTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="Terrain" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="SP_AddNewRun" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="date" Type="smalldatetime" Mode="In" />
           <Parameter Name="distance" Type="int" Mode="In" />
           <Parameter Name="shoes" Type="int" Mode="In" />
           <Parameter Name="time" Type="time" Mode="In" />
         </Function>
+        <Function Name="SP_SelectAllRuns_WithShoesName_WithTerrainType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_SelectAllRuns_WithShouesName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_SelectAllShoes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_SelectAllShoesToShoesPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -56,8 +77,13 @@
           <EntitySet Name="Run" EntityType="Self.Run" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shoes" EntityType="Self.Shoes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerrainTypes" EntityType="Self.TerrainTypes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Run_Shoes" Association="Self.FK_Run_Shoes">
             <End Role="Shoes" EntitySet="Shoes" />
+            <End Role="Run" EntitySet="Run" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Run_TerrainTypes" Association="Self.FK_Run_TerrainTypes">
+            <End Role="TerrainTypes" EntitySet="TerrainTypes" />
             <End Role="Run" EntitySet="Run" />
           </AssociationSet>
         </EntityContainer>
@@ -75,6 +101,8 @@
           <Property Name="Shoes" Type="Int32" />
           <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
           <NavigationProperty Name="Shoes1" Relationship="Self.FK_Run_Shoes" FromRole="Run" ToRole="Shoes" />
+          <Property Name="Terrain" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TerrainTypes" Relationship="TestModel.FK_Run_TerrainTypes" FromRole="Run" ToRole="TerrainTypes" />
         </EntityType>
         <EntityType Name="Shoes">
           <Key>
@@ -122,6 +150,12 @@
             <Parameter Name="shoes" Mode="In" Type="Int32" />
             <Parameter Name="time" Mode="In" Type="Time" />
           </FunctionImport>
+          <EntitySet Name="TerrainTypes" EntityType="TestModel.TerrainTypes" />
+          <FunctionImport Name="SP_SelectAllRuns_WithShoesName_WithTerrainType" ReturnType="Collection(TestModel.SP_SelectAllRuns_WithShoesName_WithTerrainType_Result)" />
+          <AssociationSet Name="FK_Run_TerrainTypes" Association="TestModel.FK_Run_TerrainTypes">
+            <End Role="TerrainTypes" EntitySet="TerrainTypes" />
+            <End Role="Run" EntitySet="Run" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="SP_SelectAllRuns_WithShouesName_Result">
           <Property Type="DateTime" Name="Date" Nullable="false" Precision="16" />
@@ -138,6 +172,33 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Id" Nullable="false" />
         </ComplexType>
+        <EntityType Name="TerrainTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Run" Relationship="TestModel.FK_Run_TerrainTypes" FromRole="TerrainTypes" ToRole="Run" />
+        </EntityType>
+        <ComplexType Name="SP_SelectAllRuns_WithShoesName_WithTerrainType_Result">
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="16" />
+          <Property Type="Int32" Name="Distance" Nullable="false" />
+          <Property Type="Time" Name="Time" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name1" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <Association Name="FK_Run_TerrainTypes">
+          <End Type="TestModel.TerrainTypes" Role="TerrainTypes" Multiplicity="1" />
+          <End Type="TestModel.Run" Role="Run" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TerrainTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Run">
+              <PropertyRef Name="Terrain" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -147,6 +208,7 @@
           <EntitySetMapping Name="Run">
             <EntityTypeMapping TypeName="TestModel.Run">
               <MappingFragment StoreEntitySet="Run">
+                <ScalarProperty Name="Terrain" ColumnName="Terrain" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Distance" ColumnName="Distance" />
@@ -201,6 +263,25 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_AddNewRun" FunctionName="TestModel.Store.SP_AddNewRun" />
+          <EntitySetMapping Name="TerrainTypes">
+            <EntityTypeMapping TypeName="TestModel.TerrainTypes">
+              <MappingFragment StoreEntitySet="TerrainTypes">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_SelectAllRuns_WithShoesName_WithTerrainType" FunctionName="TestModel.Store.SP_SelectAllRuns_WithShoesName_WithTerrainType">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TestModel.SP_SelectAllRuns_WithShoesName_WithTerrainType_Result">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

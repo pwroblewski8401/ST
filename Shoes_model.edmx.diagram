@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="TestModel.Shoes" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TestModel.Table" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="TestModel.FK_Run_Shoes" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TestModel.TerrainTypes" Width="3.875" PointX="3.375" PointY="4.75" />
+        <AssociationConnector Association="TestModel.FK_Run_TerrainTypes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

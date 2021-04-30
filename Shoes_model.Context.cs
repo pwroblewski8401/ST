@@ -30,6 +30,7 @@ namespace ST
         public virtual DbSet<Run> Run { get; set; }
         public virtual DbSet<Shoes> Shoes { get; set; }
         public virtual DbSet<Table> Table { get; set; }
+        public virtual DbSet<TerrainTypes> TerrainTypes { get; set; }
     
         public virtual ObjectResult<SP_SelectAllRuns_WithShouesName_Result> SP_SelectAllRuns_WithShouesName()
         {
@@ -65,6 +66,11 @@ namespace ST
                 new ObjectParameter("time", typeof(System.TimeSpan));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_AddNewRun", dateParameter, distanceParameter, shoesParameter, timeParameter);
+        }
+    
+        public virtual ObjectResult<SP_SelectAllRuns_WithShoesName_WithTerrainType_Result> SP_SelectAllRuns_WithShoesName_WithTerrainType()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_SelectAllRuns_WithShoesName_WithTerrainType_Result>("SP_SelectAllRuns_WithShoesName_WithTerrainType");
         }
     }
 }

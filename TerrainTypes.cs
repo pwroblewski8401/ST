@@ -12,16 +12,18 @@ namespace ST
     using System;
     using System.Collections.ObjectModel;
     
-    public partial class Run
+    public partial class TerrainTypes
     {
-        public int Id { get; set; }
-        public System.DateTime Date { get; set; }
-        public int Distance { get; set; }
-        public Nullable<int> Shoes { get; set; }
-        public System.TimeSpan Time { get; set; }
-        public int Terrain { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TerrainTypes()
+        {
+            this.Run = new ObservableCollection<Run>();
+        }
     
-        public virtual Shoes Shoes1 { get; set; }
-        public virtual TerrainTypes TerrainTypes { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ObservableCollection<Run> Run { get; set; }
     }
 }

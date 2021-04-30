@@ -10,18 +10,13 @@
 namespace ST
 {
     using System;
-    using System.Collections.ObjectModel;
     
-    public partial class Run
+    public partial class SP_SelectAllRuns_WithShoesName_WithTerrainType_Result
     {
-        public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public int Distance { get; set; }
-        public Nullable<int> Shoes { get; set; }
         public System.TimeSpan Time { get; set; }
-        public int Terrain { get; set; }
-    
-        public virtual Shoes Shoes1 { get; set; }
-        public virtual TerrainTypes TerrainTypes { get; set; }
+        public string Name { get; set; }
+        public string Name1 { get; set; }
     }
 }
